@@ -7,15 +7,14 @@
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#09090B">
 <meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="apple-touch-icon" href="icon-192.png">
 <link rel="icon" href="icon-192.png">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:#09090B;color:#AAA;font-family:Calibri,'Segoe UI',sans-serif;min-height:100vh;-webkit-user-select:none;user-select:none}
-.hd{padding:14px 16px;border-bottom:1px solid #1A1A1E;display:flex;justify-content:space-between;align-items:center}
-.logo{font-size:15px;font-weight:300;letter-spacing:4px}
-.logo b{color:#fff;font-weight:500}
-.logo span{color:#CECED6;font-weight:300}
+.hd{padding:12px 16px;border-bottom:1px solid #1A1A1E;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:14px;font-weight:700;letter-spacing:3px;color:#777}
 .st{font-size:10px;color:#444;letter-spacing:2px;font-family:Consolas,monospace}
 .st.on{color:#5DCAA5}
 .st.on::before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:#5DCAA5;margin-right:6px;animation:p 1.5s infinite}
@@ -23,66 +22,75 @@ body{background:#09090B;color:#AAA;font-family:Calibri,'Segoe UI',sans-serif;min
 .st.cal::before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:#EF9F27;margin-right:6px;animation:p .5s infinite}
 @keyframes p{0%,100%{opacity:1}50%{opacity:.3}}
 .w{padding:12px}
-.viewport{width:100%;height:200px;border-radius:6px;overflow:hidden;background:#09090B;position:relative;cursor:grab;margin-bottom:10px;border:1px solid #1A1A1E}
-.viewport canvas{width:100%;height:100%;display:block}
+.warn{background:#C03030;color:#fff;padding:10px 14px;border-radius:4px;font-size:11px;margin-bottom:10px;display:none;line-height:1.5}
+.warn.show{display:block}
 .btns{display:flex;gap:6px;margin-bottom:10px}
-.btn{flex:1;padding:13px;background:#151518;color:#AAA;border:1px solid #222;font-family:Calibri,sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;cursor:pointer;border-radius:4px}
+.btn{flex:1;padding:13px;background:#222;color:#AAA;border:none;font-family:inherit;font-size:12px;font-weight:700;letter-spacing:2px;cursor:pointer;border-radius:4px}
 .btn:active{transform:scale(.98);opacity:.8}
-.btn.go{background:#1A1A1E;color:#fff;border-color:#333}
-.btn.ble{background:#111;border:1px solid #222}
-.btn.ble.on{border-color:#5DCAA544;color:#5DCAA5}
-.cal-bar{height:3px;background:#151518;border-radius:2px;margin-bottom:10px;overflow:hidden;display:none}
+.btn.go{background:#C03030;color:#fff}
+.btn.test{background:#151518;border:1px solid #252528}
+.cal-bar{height:4px;background:#151518;border-radius:2px;margin-bottom:10px;overflow:hidden;display:none}
 .cal-bar.show{display:block}
 .cal-fill{height:100%;background:#EF9F27;border-radius:2px;width:0%;transition:width .1s}
 .modes{display:flex;gap:6px;margin-bottom:10px}
-.md{flex:1;padding:8px;background:#111;border:1px solid #1A1A1E;color:#444;font-family:Calibri,sans-serif;font-size:10px;letter-spacing:1px;cursor:pointer;border-radius:4px;text-align:center}
-.md.on{border-color:#5DCAA544;color:#5DCAA5;background:#141418}
-.vib{background:#0E0E10;border:1px solid #1A1A1E;border-radius:4px;padding:14px;text-align:center;margin-bottom:10px}
-.vib-l{font-size:9px;letter-spacing:2px;color:#444;margin-bottom:5px;font-family:Consolas,monospace}
-.vib-s{font-size:20px;font-weight:700;letter-spacing:4px}
+.md{flex:1;padding:7px;background:#111;border:1px solid #1A1A1E;color:#444;font-family:inherit;font-size:9px;letter-spacing:1px;cursor:pointer;border-radius:4px;text-align:center}
+.md.on{border-color:#5DCAA5;color:#AAA;background:#141418}
+.vib{background:#0E0E10;border:1px solid #1A1A1E;border-radius:4px;padding:12px;text-align:center;margin-bottom:10px}
+.vib-l{font-size:8px;letter-spacing:2px;color:#444;margin-bottom:5px;font-family:Consolas,monospace}
+.vib-s{font-size:18px;font-weight:700;letter-spacing:4px}
 .vib-s.on{color:#5DCAA5;animation:sh .08s infinite alternate}
-.vib-s.off{color:#222}
+.vib-s.off{color:#282828}
 @keyframes sh{0%{transform:translateX(-1px)}100%{transform:translateX(1px)}}
-.vib-p{font-size:10px;color:#444;margin-top:4px;font-family:Consolas,monospace}
-.nf{font-size:10px;color:#444;font-family:Consolas,monospace;text-align:center;margin-bottom:10px}
+.vib-p{font-size:9px;color:#444;margin-top:3px;font-family:Consolas,monospace}
+.nf{font-size:9px;color:#444;font-family:Consolas,monospace;text-align:center;margin-bottom:10px}
 .nf span{color:#5DCAA5}
-.spec{background:#0E0E10;border:1px solid #1A1A1E;border-radius:4px;overflow:hidden;margin-bottom:10px;height:65px}
+.spec{background:#0E0E10;border:1px solid #1A1A1E;border-radius:4px;overflow:hidden;margin-bottom:10px;height:60px}
 .spec canvas{width:100%;height:100%;display:block}
 .meters{display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;margin-bottom:10px}
-.m{background:#0E0E10;border:1px solid #141418;border-radius:4px;padding:9px}
-.m-l{font-size:9px;letter-spacing:1.5px;color:#444;margin-bottom:4px;font-family:Consolas,monospace}
+.m{background:#0E0E10;border:1px solid #141418;border-radius:4px;padding:8px}
+.m-l{font-size:7px;letter-spacing:1.5px;color:#444;margin-bottom:3px;font-family:Consolas,monospace}
 .m-b{height:5px;background:#1A1A1E;border-radius:2px;overflow:hidden}
 .m-f{height:100%;border-radius:2px;width:0%;transition:width 50ms}
-.m-v{font-size:14px;font-weight:700;margin-top:3px;font-variant-numeric:tabular-nums;font-family:Consolas,monospace}
+.m-v{font-size:12px;font-weight:700;margin-top:2px;font-variant-numeric:tabular-nums;font-family:Consolas,monospace}
 .c1 .m-f{background:#5DCAA5}
 .c2 .m-f{background:#EF9F27}
 .c3 .m-f{background:#AFA9EC}
 .zn{margin-bottom:10px}
-.zn-t{font-size:9px;letter-spacing:2px;color:#333;margin-bottom:5px;font-family:Consolas,monospace}
+.zn-t{font-size:8px;letter-spacing:2px;color:#333;margin-bottom:5px;font-family:Consolas,monospace}
 .zg{display:grid;grid-template-columns:1fr 1fr;gap:5px}
-.z{background:#0E0E10;border:2px solid #181818;border-radius:4px;padding:10px 6px;text-align:center;transition:all 60ms}
+.z{background:#0E0E10;border:2px solid #181818;border-radius:4px;padding:8px 6px;text-align:center;transition:all 60ms}
 .z.on{border-color:#5DCAA5;box-shadow:0 0 10px rgba(93,202,165,.15)}
-.z-i{font-size:14px;font-weight:700;letter-spacing:2px;font-family:Consolas,monospace}
-.z-b{font-size:8px;color:#333;letter-spacing:1px;margin-top:2px;font-family:Consolas,monospace}
-.z-v{font-size:10px;margin-top:3px;color:#444;font-family:Consolas,monospace}
-.zb .z.on{border-color:#EF9F27;box-shadow:0 0 8px rgba(239,159,39,.12)}
-.sens{display:flex;align-items:center;gap:8px;margin-bottom:10px;font-size:10px;color:#555;font-family:Consolas,monospace}
+.z-i{font-size:13px;font-weight:700;letter-spacing:2px;font-family:Consolas,monospace}
+.z-b{font-size:7px;color:#333;letter-spacing:1px;margin-top:2px;font-family:Consolas,monospace}
+.z-v{font-size:9px;margin-top:3px;color:#444;font-family:Consolas,monospace}
+.zb .z.on{border-color:#C03030;box-shadow:0 0 8px rgba(192,48,48,.12)}
+.info{font-size:10px;color:#444;line-height:1.6;padding:10px;background:#0E0E10;border:1px solid #141418;border-radius:4px}
+.info b{color:#666}
+.db{font-size:8px;color:#444;font-family:Consolas,monospace;margin-top:5px;padding:6px;background:#0A0A0C;border:1px solid #141418;border-radius:4px;max-height:50px;overflow:auto;line-height:1.4;word-break:break-all}
+.install-bar{display:none;padding:10px;background:#141418;border:1px solid #5DCAA5;border-radius:4px;margin-bottom:10px;text-align:center}
+.install-bar.show{display:block}
+.install-btn{padding:10px 20px;background:#5DCAA5;color:#09090B;border:none;font-family:inherit;font-size:12px;font-weight:700;letter-spacing:2px;cursor:pointer;border-radius:4px}
+.install-btn:active{transform:scale(.98)}
+.install-msg{font-size:10px;color:#666;margin-top:6px}
+.sens{display:flex;align-items:center;gap:8px;margin-bottom:10px;font-size:10px;color:#555}
 .sens input{flex:1;height:4px;-webkit-appearance:none;appearance:none;background:#1A1A1E;border-radius:2px;outline:none}
 .sens input::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:#5DCAA5;cursor:pointer}
-.footer{text-align:center;padding:10px 0;font-size:8px;color:#222;letter-spacing:2px;font-family:Consolas,monospace}
 </style>
 </head>
 <body>
 <div class="hd">
-<div class="logo"><b>HAPTIC</b><span>WEAR</span></div>
+<div class="logo">HAPTICWEAR</div>
 <div class="st" id="st">STANDBY</div>
 </div>
 <div class="w">
-<div class="viewport" id="viewport"></div>
+<div class="warn" id="warn"></div>
+<div class="install-bar" id="installBar">
+<button class="install-btn" id="installBtn" onclick="installApp()">INSTALL HAPTICWEAR APP</button>
+<div class="install-msg">Add to home screen for fullscreen experience</div>
+</div>
 <div class="btns">
 <button class="btn" id="btn" onclick="go()">START</button>
-<button class="btn" onclick="testVib()">TEST VIBRATE</button>
-<button class="btn ble" id="bleBtn" onclick="toggleBLE()">CONNECT</button>
+<button class="btn test" onclick="testVib()">TEST VIBRATE</button>
 </div>
 <div class="cal-bar" id="calBar"><div class="cal-fill" id="calFill"></div></div>
 <div class="nf" id="nfDisp"></div>
@@ -106,178 +114,265 @@ body{background:#09090B;color:#AAA;font-family:Calibri,'Segoe UI',sans-serif;min
 <div class="zn">
 <div class="zn-t">FRONT</div>
 <div class="zg">
-<div class="z" id="z0"><div class="z-i">M1</div><div class="z-b">UPPER LEFT</div><div class="z-v" id="zv0">0%</div></div>
-<div class="z" id="z1"><div class="z-i">M2</div><div class="z-b">LOWER RIGHT</div><div class="z-v" id="zv1">0%</div></div>
+<div class="z" id="z0"><div class="z-i">Z1</div><div class="z-b">HIGH L</div><div class="z-v" id="zv0">0%</div></div>
+<div class="z" id="z1"><div class="z-i">Z2</div><div class="z-b">HIGH R</div><div class="z-v" id="zv1">0%</div></div>
+<div class="z" id="z2"><div class="z-i">Z3</div><div class="z-b">MID L</div><div class="z-v" id="zv2">0%</div></div>
+<div class="z" id="z3"><div class="z-i">Z4</div><div class="z-b">MID R</div><div class="z-v" id="zv3">0%</div></div>
+<div class="z" id="z4"><div class="z-i">Z5</div><div class="z-b">LOW L</div><div class="z-v" id="zv4">0%</div></div>
+<div class="z" id="z5"><div class="z-i">Z6</div><div class="z-b">LOW R</div><div class="z-v" id="zv5">0%</div></div>
 </div>
 <div class="zn-t" style="margin-top:6px">BACK</div>
 <div class="zg zb">
-<div class="z" id="z2"><div class="z-i">M3</div><div class="z-b">UPPER RIGHT</div><div class="z-v" id="zv2">0%</div></div>
-<div class="z" id="z3"><div class="z-i">M4</div><div class="z-b">LOWER LEFT</div><div class="z-v" id="zv3">0%</div></div>
+<div class="z" id="z6"><div class="z-i">Z7</div><div class="z-b">BACK L</div><div class="z-v" id="zv6">0%</div></div>
+<div class="z" id="z7"><div class="z-i">Z8</div><div class="z-b">BACK R</div><div class="z-v" id="zv7">0%</div></div>
 </div>
 </div>
-<div class="footer">HAPTICWEAR · BARC0038 · THE BARTLETT UCL</div>
+<div class="info">
+<b>NOISE GATE:</b> On start, calibrates 2s of ambient noise. Only sounds above that floor trigger vibration.<br>
+<b>SENSITIVITY:</b> Slide right = more reactive. Slide left = only loud sounds trigger.<br>
+<b>Chrome recommended.</b> Hola also works on some devices.
 </div>
- 
-<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.162.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.162.0/examples/jsm/"}}</script>
-<script type="module">
-import * as THREE from 'three';
-import{GLTFLoader}from'three/addons/loaders/GLTFLoader.js';
-const vp=document.getElementById('viewport');
-const scene=new THREE.Scene();scene.background=new THREE.Color(0x09090B);
-const cam=new THREE.PerspectiveCamera(35,vp.clientWidth/vp.clientHeight,0.1,50);cam.position.set(0,0.2,2.8);
-const ren=new THREE.WebGLRenderer({antialias:true});ren.setSize(vp.clientWidth,vp.clientHeight);ren.setPixelRatio(Math.min(window.devicePixelRatio,2));
-vp.appendChild(ren.domElement);
-scene.add(new THREE.AmbientLight(0xffffff,0.5));
-const dl=new THREE.DirectionalLight(0xfff8ee,0.9);dl.position.set(3,4,3);scene.add(dl);
-const r2=new THREE.DirectionalLight(0xddeeff,0.4);r2.position.set(-3,2,-2);scene.add(r2);
-const group=new THREE.Group();scene.add(group);
-const grid=new THREE.GridHelper(4,30,0x111114,0x111114);grid.position.y=-0.85;scene.add(grid);
-const loader=new GLTFLoader();
-function buildProc(){
-  const mat=new THREE.MeshStandardMaterial({color:0x1a1a1e,roughness:0.7,metalness:0.1,transparent:true,opacity:0.55});
-  group.add(new THREE.Mesh(new THREE.CylinderGeometry(0.28,0.22,1.0,24),mat).translateY(0.25));
-  group.add(new THREE.Mesh(new THREE.CylinderGeometry(0.34,0.30,0.12,24),mat).translateY(0.64));
-  group.add(new THREE.Mesh(new THREE.CylinderGeometry(0.09,0.11,0.14,16),mat).translateY(0.82));
-  group.add(new THREE.Mesh(new THREE.SphereGeometry(0.12,16,12),mat).translateY(1.0));
-  group.add(new THREE.Mesh(new THREE.CylinderGeometry(0.282,0.222,1.01,24,6),new THREE.MeshBasicMaterial({color:0x2a2a30,wireframe:true,transparent:true,opacity:0.12})).translateY(0.25));
-}
-loader.load('hapticwear-model.glb',gltf=>{
-  const m=gltf.scene;const box=new THREE.Box3().setFromObject(m);const sz=box.getSize(new THREE.Vector3());const ct=box.getCenter(new THREE.Vector3());
-  m.position.set(-ct.x,-ct.y,-ct.z);const wr=new THREE.Group();wr.add(m);wr.scale.setScalar(1.6/Math.max(sz.x,sz.y,sz.z));wr.position.y=0.25;
-  m.traverse(c=>{if(c.isMesh)c.material=new THREE.MeshStandardMaterial({color:0x8a8880,roughness:0.6,metalness:0.2,transparent:true,opacity:0.7,side:THREE.DoubleSide})});
-  group.add(wr)},undefined,()=>buildProc());
-const mpos=[{x:-0.18,y:0.50,z:0.18},{x:0.16,y:0.05,z:0.20},{x:0.18,y:0.50,z:-0.16},{x:-0.16,y:0.05,z:-0.18}];
-const pads=[];
-mpos.forEach((p,i)=>{
-  const dir=p.z>=0?new THREE.Vector3(0,0,1):new THREE.Vector3(0,0,-1);
-  const rm=new THREE.MeshBasicMaterial({color:0x5DCAA5,transparent:true,opacity:0,side:THREE.DoubleSide,depthWrite:false});
-  const ring=new THREE.Mesh(new THREE.RingGeometry(0.04,0.07,32),rm);ring.position.set(p.x,p.y,p.z);ring.lookAt(p.x+dir.x,p.y+dir.y,p.z+dir.z);group.add(ring);
-  const cm=new THREE.MeshBasicMaterial({color:0x5DCAA5,transparent:true,opacity:0.03,side:THREE.DoubleSide,depthWrite:false});
-  const core=new THREE.Mesh(new THREE.CircleGeometry(0.04,32),cm);core.position.set(p.x,p.y,p.z+(p.z>=0?0.001:-0.001));core.lookAt(p.x+dir.x,p.y+dir.y,p.z+dir.z);group.add(core);
-  pads.push({ring,rm,core,cm,a:0})});
-window._pads=pads;
-let autoR=true,dragS=null,rotY=0;
-vp.addEventListener('pointerdown',e=>{dragS=e.clientX;autoR=false});
-window.addEventListener('pointermove',e=>{if(dragS!==null){rotY+=(e.clientX-dragS)*0.01;dragS=e.clientX}});
-window.addEventListener('pointerup',()=>{dragS=null;setTimeout(()=>autoR=true,3000)});
-function anim(){requestAnimationFrame(anim);if(autoR)rotY+=0.003;group.rotation.y=rotY;
-  const mv=window._zvals||[0,0,0,0];
-  pads.forEach((p,i)=>{const t=mv[i];p.a+=(t-p.a)*0.2;const a=p.a;p.rm.opacity=a*0.7;p.cm.opacity=0.03+a*0.5;const s=1+a*0.4;p.ring.scale.set(s,s,s)});
-  ren.render(scene,cam)}
-anim();
-window.addEventListener('resize',()=>{cam.aspect=vp.clientWidth/vp.clientHeight;cam.updateProjectionMatrix();ren.setSize(vp.clientWidth,vp.clientHeight)});
-</script>
+<div class="db" id="dbg">Ready</div>
+</div>
 <script>
 let ax,an,fft,run=false,mode='cross',af,cv,cx;
 const FS=1024,SR=44100;
 let lt=0,noiseFloor=0,calibrated=false,calSamples=[];
 let sensitivity=7;
-let bleDevice,bleChar,bleOn=false;
-window._zvals=[0,0,0,0];
+const dbg=document.getElementById('dbg');
+function log(s){dbg.textContent=s+'\n'+dbg.textContent.slice(0,200)}
+
 function updateSens(v){sensitivity=parseInt(v);document.getElementById('sensVal').textContent=v}
-function testVib(){if('vibrate'in navigator)navigator.vibrate([300,80,300,80,300])}
+
+function testVib(){
+  if(!('vibrate' in navigator)){showWarn('No Vibration API.');return}
+  navigator.vibrate([300,80,300,80,300]);
+  log('Test vibrate fired');
+}
+function showWarn(t){const w=document.getElementById('warn');w.textContent=t;w.classList.add('show')}
+
 function ic(){cv=document.getElementById('cv');cx=cv.getContext('2d');cv.width=cv.offsetWidth*2;cv.height=cv.offsetHeight*2}
- 
-async function toggleBLE(){
-  if(bleOn){if(bleDevice&&bleDevice.gatt.connected)bleDevice.gatt.disconnect();bleOn=false;document.getElementById('bleBtn').textContent='CONNECT';document.getElementById('bleBtn').classList.remove('on');return}
-  try{bleDevice=await navigator.bluetooth.requestDevice({filters:[{name:'HapticWear'}],optionalServices:['19b10000-e8f2-537e-4f6c-d104768a1214']});
-    const srv=await bleDevice.gatt.connect();const svc=await srv.getPrimaryService('19b10000-e8f2-537e-4f6c-d104768a1214');
-    bleChar=await svc.getCharacteristic('19b10001-e8f2-537e-4f6c-d104768a1214');
-    bleOn=true;document.getElementById('bleBtn').textContent='CONNECTED';document.getElementById('bleBtn').classList.add('on');
-    bleDevice.addEventListener('gattserverdisconnected',()=>{bleOn=false;document.getElementById('bleBtn').textContent='CONNECT';document.getElementById('bleBtn').classList.remove('on')});
-  }catch(e){console.error(e)}}
-async function sendBLE(v){if(!bleOn||!bleChar)return;try{await bleChar.writeValueWithoutResponse(new Uint8Array(v.map(x=>Math.min(200,Math.max(0,Math.round(x))))).buffer)}catch(e){}}
- 
+
 async function go(){
   const btn=document.getElementById('btn');
   if(run){stop();btn.textContent='START';btn.classList.remove('go');return}
-  try{ax=new(window.AudioContext||window.webkitAudioContext)({sampleRate:SR});
+  try{
+    ax=new(window.AudioContext||window.webkitAudioContext)({sampleRate:SR});
     const s=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:false,noiseSuppression:false,autoGainControl:false}});
-    const src=ax.createMediaStreamSource(s);an=ax.createAnalyser();an.fftSize=FS;an.smoothingTimeConstant=0.3;
+    const src=ax.createMediaStreamSource(s);
+    an=ax.createAnalyser();an.fftSize=FS;an.smoothingTimeConstant=0.4;
     src.connect(an);fft=new Float32Array(an.frequencyBinCount);
     run=true;btn.textContent='STOP';btn.classList.add('go');
+    // Start calibration
     calibrated=false;calSamples=[];noiseFloor=0;
     document.getElementById('st').textContent='CALIBRATING';document.getElementById('st').className='st cal';
-    document.getElementById('calBar').classList.add('show');document.getElementById('nfDisp').textContent='Stay quiet...';
-    ic();lp()}catch(e){console.error(e)}}
- 
-function stop(){run=false;if(af)cancelAnimationFrame(af);if(ax)ax.close();navigator.vibrate(0);calibrated=false;
+    document.getElementById('calBar').classList.add('show');
+    document.getElementById('nfDisp').textContent='Stay quiet for 2 seconds...';
+    ic();lp();
+  }catch(e){
+    log('ERR: '+e.name);
+    showWarn(e.name==='NotAllowedError'?'Mic blocked. Try HTTPS or different browser.':'Error: '+e.message);
+  }
+}
+
+function stop(){
+  run=false;if(af)cancelAnimationFrame(af);if(ax)ax.close();
+  navigator.vibrate(0);calibrated=false;
   document.getElementById('st').textContent='STANDBY';document.getElementById('st').className='st';
   document.getElementById('vs').textContent='OFF';document.getElementById('vs').className='vib-s off';
-  document.getElementById('calBar').classList.remove('show');document.getElementById('nfDisp').textContent=''}
- 
-function sm(m){mode=m;document.querySelectorAll('.md').forEach(b=>b.classList.remove('on'));
-  document.getElementById(m==='cross'?'m1':m==='arb'?'m2':'m3').classList.add('on');if(m==='off')navigator.vibrate(0)}
- 
+  document.getElementById('calBar').classList.remove('show');
+  document.getElementById('nfDisp').textContent='';
+}
+
+function sm(m){
+  mode=m;document.querySelectorAll('.md').forEach(b=>b.classList.remove('on'));
+  document.getElementById(m==='cross'?'m1':m==='arb'?'m2':'m3').classList.add('on');
+  if(m==='off')navigator.vibrate(0);
+}
+
 function fi(f){return Math.round(f*FS/SR)}
-function tdRMS(){const buf=new Float32Array(an.fftSize);an.getFloatTimeDomainData(buf);let s=0;for(let i=0;i<buf.length;i++)s+=buf[i]*buf[i];return Math.sqrt(s/buf.length)}
-function be(d,lo,hi){const a=fi(lo),b=Math.min(fi(hi),d.length-1);let s=0,n=0;for(let i=a;i<=b;i++){s+=Math.pow(10,d[i]/20);n++}return n>0?s/n:0}
- 
-let sLo=0,sMi=0,sHi=0,sRms=0;const SMOOTH=0.25;let lastVibEnd=0;
- 
+
+function tdRMS(){
+  const buf=new Float32Array(an.fftSize);
+  an.getFloatTimeDomainData(buf);
+  let s=0;for(let i=0;i<buf.length;i++)s+=buf[i]*buf[i];
+  return Math.sqrt(s/buf.length);
+}
+
+function be(d,lo,hi){
+  const a=fi(lo),b=Math.min(fi(hi),d.length-1);
+  let s=0,n=0;
+  for(let i=a;i<=b;i++){const v=Math.pow(10,d[i]/20);s+=v;n++}
+  return n>0?s/n:0;
+}
+
+// Smoothed values for less jitter
+let sLo=0,sMi=0,sHi=0,sRms=0;
+const SMOOTH=0.3;
+
+let vibCount=0,lastVibEnd=0;
+
 function doVib(r,lo,mi,hi){
-  if(mode==='off'){navigator.vibrate(0);return{p:'OFF',z:[0,0,0,0]}}
-  // BOOSTED sensitivity: sensM ranges 0.6 to 6.0
-  const sensM=sensitivity/1.7;
-  const gate=noiseFloor*(2.5-sensM*0.3);
-  const rGated=Math.max(0,r-Math.max(gate,0.001));
-  if(rGated<0.001){navigator.vibrate(0);return{p:'SILENT',z:[0,0,0,0]}}
-  const headroom=Math.max(0.005,0.08-gate);
-  const rN=Math.min(rGated/headroom*sensM,1);
-  // BOOSTED band sensitivity
-  const lN=Math.min(lo/0.001*sensM,1);
-  const mN=Math.min(mi/0.0008*sensM,1);
-  const hN=Math.min(hi/0.0003*sensM,1);
+  if(mode==='off'){navigator.vibrate(0);return{p:'OFF',z:[0,0,0,0,0,0,0,0]}}
+
+  // Subtract noise floor with sensitivity multiplier
+  const sensMultiplier=sensitivity/5; // 0.2 to 2.0
+  const gate=noiseFloor*(3.0-sensMultiplier*1.5); // higher sens = lower gate
+  const rGated=Math.max(0,r-gate);
+
+  if(rGated<0.002){
+    navigator.vibrate(0);
+    return{p:'SILENT',z:[0,0,0,0,0,0,0,0]};
+  }
+
+  // Normalize relative to headroom above noise floor
+  const headroom=Math.max(0.01,0.15-gate);
+  const rN=Math.min(rGated/headroom*sensMultiplier,1);
+  const lN=Math.min(lo/0.003*sensMultiplier,1);
+  const mN=Math.min(mi/0.002*sensMultiplier,1);
+  const hN=Math.min(hi/0.0008*sensMultiplier,1);
+
   let z,pd;
-  if(mode==='cross'){z=[hN*rN,lN*rN,hN*rN*.7,lN*rN*.7];pd='CROSS-MODAL'}
-  else{z=[lN*rN,hN*rN,mN*rN*.7,mN*rN*.7];pd='ARBITRARY'}
-  const mx=Math.max(...z);const now=Date.now();
-  if(now-lt>40){lt=now;
-    if(mx>0.02){const dur=Math.round(30+mx*180);
+  if(mode==='cross'){
+    z=[hN*rN,hN*rN,mN*rN,mN*rN,lN*rN,lN*rN,lN*rN*.5,lN*rN*.5];pd='CROSS-MODAL';
+  }else{
+    z=[lN*rN,lN*rN,hN*rN,hN*rN,mN*rN,mN*rN,hN*rN*.5,mN*rN*.5];pd='ARBITRARY';
+  }
+
+  const mx=Math.max(...z);
+  const now=Date.now();
+
+  // More reactive: shorter intervals, sharper on/off
+  if(now-lt>45){
+    lt=now;
+    if(mx>0.03){
+      const dur=Math.round(25+mx*150);
       let band;
-      if(mode==='cross'){if(lN>=mN&&lN>=hN){navigator.vibrate([dur+50,10]);band='LOW'}else if(hN>=mN){navigator.vibrate([15,5,15,5,15,5,15]);band='HIGH'}else{navigator.vibrate([dur,12,dur/2,12]);band='MID'}}
-      else{navigator.vibrate([dur,20]);band=lN>=mN&&lN>=hN?'LOW':hN>=mN?'HIGH':'MID'}
-      pd+=' · '+band;lastVibEnd=now+dur}else{if(now>lastVibEnd)navigator.vibrate(0)}}
-  if(bleOn){sendBLE(z.map(v=>Math.min(200,Math.round(v*255))))}
-  return{p:pd,z}}
- 
-function ds(d){const w=cv.width,h=cv.height;cx.fillStyle='#0A0A0C';cx.fillRect(0,0,w,h);
+      if(mode==='cross'){
+        if(lN>=mN&&lN>=hN){navigator.vibrate([dur+40,10]);band='LOW'}
+        else if(hN>=mN){navigator.vibrate([12,6,12,6,12,6,12]);band='HIGH'}
+        else{navigator.vibrate([dur,15,dur/2,15]);band='MID'}
+      }else{
+        navigator.vibrate([dur,25]);
+        band=lN>=mN&&lN>=hN?'LOW':hN>=mN?'HIGH':'MID';
+      }
+      pd+=' · '+band;
+      lastVibEnd=now+dur;
+    }else{
+      // Sharp cutoff: stop vibration immediately when below threshold
+      if(now>lastVibEnd) navigator.vibrate(0);
+    }
+  }
+  return{p:pd,z};
+}
+
+function ds(d){
+  const w=cv.width,h=cv.height;
+  cx.fillStyle='#0A0A0C';cx.fillRect(0,0,w,h);
   const n=Math.min(80,d.length),bw=w/n;
-  for(let i=0;i<n;i++){const v=(d[i]+100)/100,bh=Math.max(0,v*h*.85),f=i*SR/FS;
-    cx.fillStyle=f<300?'#5DCAA520':f<2000?'#EF9F2720':'#AFA9EC20';
+  for(let i=0;i<n;i++){
+    const v=(d[i]+100)/100,bh=Math.max(0,v*h*.85),f=i*SR/FS;
+    cx.fillStyle=f<300?'#5DCAA515':f<2000?'#EF9F2715':'#AFA9EC15';
     cx.fillRect(i*bw,h-bh,bw-1,bh);
     cx.fillStyle=f<300?'#5DCAA5':f<2000?'#EF9F27':'#AFA9EC';
-    cx.fillRect(i*bw,h-bh,bw-1,2)}
-  if(calibrated&&noiseFloor>0){const nfY=h-(noiseFloor/0.05)*h;cx.strokeStyle='#ffffff15';cx.lineWidth=1;cx.setLineDash([4,4]);cx.beginPath();cx.moveTo(0,nfY);cx.lineTo(w,nfY);cx.stroke();cx.setLineDash([])}}
- 
+    cx.fillRect(i*bw,h-bh,bw-1,2);
+  }
+  // Noise floor line
+  if(calibrated&&noiseFloor>0){
+    const nfY=h-(noiseFloor/0.05)*h;
+    cx.strokeStyle='#C0303040';cx.lineWidth=1;cx.setLineDash([4,4]);
+    cx.beginPath();cx.moveTo(0,nfY);cx.lineTo(w,nfY);cx.stroke();cx.setLineDash([]);
+  }
+}
+
 let calStart=0;
-function lp(){if(!run)return;af=requestAnimationFrame(lp);
-  an.getFloatFrequencyData(fft);const r=tdRMS();
+function lp(){
+  if(!run)return;af=requestAnimationFrame(lp);
+  an.getFloatFrequencyData(fft);
+  const r=tdRMS();
   const lo=be(fft,20,300),mi=be(fft,300,2000),hi=be(fft,2000,8000);
-  sRms=sRms*SMOOTH+r*(1-SMOOTH);sLo=sLo*SMOOTH+lo*(1-SMOOTH);sMi=sMi*SMOOTH+mi*(1-SMOOTH);sHi=sHi*SMOOTH+hi*(1-SMOOTH);
-  if(!calibrated){if(calStart===0)calStart=Date.now();calSamples.push(r);
-    const elapsed=(Date.now()-calStart)/2000;document.getElementById('calFill').style.width=Math.min(elapsed*100,100)+'%';
-    if(elapsed>=1){const mean=calSamples.reduce((a,b)=>a+b,0)/calSamples.length;
+
+  // Smooth values
+  sRms=sRms*SMOOTH+r*(1-SMOOTH);
+  sLo=sLo*SMOOTH+lo*(1-SMOOTH);
+  sMi=sMi*SMOOTH+mi*(1-SMOOTH);
+  sHi=sHi*SMOOTH+hi*(1-SMOOTH);
+
+  // Calibration phase: collect 2 seconds of noise floor samples
+  if(!calibrated){
+    if(calStart===0)calStart=Date.now();
+    calSamples.push(r);
+    const elapsed=(Date.now()-calStart)/2000;
+    document.getElementById('calFill').style.width=Math.min(elapsed*100,100)+'%';
+    if(elapsed>=1){
+      // Calculate noise floor as mean + 1 std dev
+      const mean=calSamples.reduce((a,b)=>a+b,0)/calSamples.length;
       const std=Math.sqrt(calSamples.reduce((a,b)=>a+(b-mean)**2,0)/calSamples.length);
-      noiseFloor=mean+std*0.5;calibrated=true;calStart=0;
+      noiseFloor=mean+std;
+      calibrated=true;
+      calStart=0;
       document.getElementById('st').textContent='LIVE';document.getElementById('st').className='st on';
       document.getElementById('calBar').classList.remove('show');
-      document.getElementById('nfDisp').innerHTML='Noise floor: <span>'+noiseFloor.toFixed(4)+'</span>'}ds(fft);return}
-  const sensM=sensitivity/1.7;
-  const lP=Math.min(sLo/0.001*sensM*100,100),mP=Math.min(sMi/0.0008*sensM*100,100),hP=Math.min(sHi/0.0003*sensM*100,100);
+      document.getElementById('nfDisp').innerHTML='Noise floor: <span>'+noiseFloor.toFixed(4)+'</span> — sounds above this trigger vibration';
+      log('Calibrated. NF='+noiseFloor.toFixed(5)+' mean='+mean.toFixed(5)+' std='+std.toFixed(5));
+    }
+    ds(fft);
+    return;
+  }
+
+  // Display
+  const sensM=sensitivity/5;
+  const lP=Math.min(sLo/0.003*sensM*100,100);
+  const mP=Math.min(sMi/0.002*sensM*100,100);
+  const hP=Math.min(sHi/0.0008*sensM*100,100);
+
   document.getElementById('b2').style.width=lP+'%';document.getElementById('v2').textContent=Math.round(lP)+'%';
   document.getElementById('b3').style.width=mP+'%';document.getElementById('v3').textContent=Math.round(mP)+'%';
   document.getElementById('b4').style.width=hP+'%';document.getElementById('v4').textContent=Math.round(hP)+'%';
-  const res=doVib(sRms,sLo,sMi,sHi);window._zvals=res.z;
-  res.z.forEach((v,i)=>{const el=document.getElementById('z'+i),pct=Math.round(v*100);
-    if(el)el.classList.toggle('on',pct>5);const ve=document.getElementById('zv'+i);if(ve)ve.textContent=pct+'%'});
-  const mx=Math.max(...res.z),vs=document.getElementById('vs'),vp2=document.getElementById('vp');
-  if(mode!=='off'&&mx>0.03){vs.textContent='ACTIVE';vs.className='vib-s on';vp2.textContent=res.p}
-  else{vs.textContent=mode==='off'?'DISABLED':'QUIET';vs.className='vib-s off';vp2.textContent=mode==='off'?'Visual only':'Below gate'}
-  ds(fft)}
-if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
-let dp;window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();dp=e});
+
+  const res=doVib(sRms,sLo,sMi,sHi);
+  res.z.forEach((v,i)=>{
+    const el=document.getElementById('z'+i),pct=Math.round(v*100);
+    if(el){if(pct>5)el.classList.add('on');else el.classList.remove('on')}
+    const ve=document.getElementById('zv'+i);if(ve)ve.textContent=pct+'%';
+  });
+
+  const mx=Math.max(...res.z),vs=document.getElementById('vs'),vp=document.getElementById('vp');
+  if(mode!=='off'&&mx>0.03){vs.textContent='ACTIVE';vs.className='vib-s on';vp.textContent=res.p}
+  else{vs.textContent=mode==='off'?'DISABLED':'QUIET';vs.className='vib-s off';vp.textContent=mode==='off'?'Visual only':'Below gate'}
+  ds(fft);
+}
+</script>
+<script>
+// PWA: Service Worker Registration
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('sw.js').then(()=>{
+    console.log('SW registered');
+  }).catch(e=>console.log('SW failed',e));
+}
+
+// PWA: Install Prompt
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt',(e)=>{
+  e.preventDefault();
+  deferredPrompt=e;
+  document.getElementById('installBar').classList.add('show');
+});
+
+function installApp(){
+  if(!deferredPrompt)return;
+  deferredPrompt.prompt();
+  deferredPrompt.userChoice.then((r)=>{
+    if(r.outcome==='accepted'){
+      document.getElementById('installBar').classList.remove('show');
+    }
+    deferredPrompt=null;
+  });
+}
+
+window.addEventListener('appinstalled',()=>{
+  document.getElementById('installBar').classList.remove('show');
+});
 </script>
 </body>
 </html>
- 
